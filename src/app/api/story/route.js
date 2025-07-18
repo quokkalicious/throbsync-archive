@@ -16,7 +16,7 @@ export async function POST(request) {
 
     const ELEVEN_KEY     = process.env.ELEVENLABS_API_KEY;
     const ELEVEN_VOICEID = process.env.ELEVENLABS_VOICE_ID;
-    if (!ELEVEN_KEY || !ELEVENLABS_VOICEID) {
+    if (!ELEVEN_KEY || !ELEVEN_VOICEID) {
       return NextResponse.json({ error: 'Missing env vars' }, { status: 500 });
     }
 
