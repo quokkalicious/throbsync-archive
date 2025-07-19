@@ -1,3 +1,0 @@
-[submodule "grok-proxy"]
-  path = grok-proxy
-  url = https://github.com/quokkalicious/grok-proxy.git
