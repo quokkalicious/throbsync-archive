@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ThrobSync</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; max-width: 400px; margin: auto; }
+    label { display: block; margin: .5rem 0; }
+    button { margin-top: 1rem; padding: .5rem 1rem; }
+    pre { background: #f4f4f4; padding: 1rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>ThrobSync</h1>
+  <label>Your name: <input id="name" placeholder="Alex"></label>
+  <label>Pace:
+    <select id="pace">
+      <option value="relaxed">Relaxed</option>
+      <option value="power">Power</option>
+    </select>
+  </label>
+  <label>Voice:
+    <select id="voice">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </label>
+  <button id="start">Start Session</button>
+  <pre id="output"></pre>
+
+  <script>
+    const TRIGGER = 'https://eo8dtllee89tyu.m.pipedream.net'; // ← your URL
+    document.getElementById('start').onclick = async () => {
+      const payload = {
+        name:   document.getElementById('name').value,
+        pace:   document.getElementById('pace').value,
+        voice:  document.getElementById('voice').value
+      };
+      const out = document.getElementById('output');
+      out.textContent = '…waiting…';
+      try {
+        const res = await fetch(TRIGGER, {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const txt = await res.text();
+        out.textContent = txt;
+      } catch (e) {
+        out.textContent = '❌ '+e;
+      }
+    };
+  </script>
+</body>
+</html>
